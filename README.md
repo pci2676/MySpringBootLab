@@ -27,7 +27,7 @@
 
 
 
-## 삽질 할 예정인 곳
+## 삽질 해보고 싶은 곳
 
 - @Transactional
   - propagation = Propagation.REQUIRES_NEW
