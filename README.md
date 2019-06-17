@@ -28,6 +28,3 @@
 
 
 ## 삽질 할 예정인 곳
-
-- @Transactional
-  - propagation = Propagation.REQUIRES_NEW
