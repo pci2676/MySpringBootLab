@@ -1,8 +1,7 @@
-pluginManagement {
-	repositories {
-		gradlePluginPortal()
-	}
-}
 rootProject.name = 'bomspringboot'
-include 'validation'
+include 'bomspringboot-validation'
+
+include 'bomspringboot-conditional-resttemplate'
+include 'bomspringboot-conditional-resttemplate:external-api'
+findProject(':bomspringboot-conditional-resttemplate:external-api')?.name = 'external-api'
 
