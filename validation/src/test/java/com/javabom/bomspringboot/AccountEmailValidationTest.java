@@ -1,17 +1,19 @@
-package org.ds.study.validationTest.entity;
+package com.javabom.bomspringboot;
 
-import org.ds.study.validationTest.repository.AccountRepository;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.javabom.bomspringboot.validationTest.entity.Account;
+import com.javabom.bomspringboot.validationTest.repository.AccountRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class AccountEmailValidationTest {
 
     @Autowired
@@ -19,13 +21,14 @@ public class AccountEmailValidationTest {
 
     String name = "박찬인";
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() {
         accountRepository.deleteAll();
     }
 
+    @DisplayName("이메일_벨리데이션_확인_널값")
     @Test
-    public void 이메일_벨리데이션_확인_널값() {
+    public void test1() {
         //given
         String email = null;
 
@@ -39,8 +42,9 @@ public class AccountEmailValidationTest {
         accountRepository.save(account);
     }
 
+    @DisplayName("이메일_벨리데이션_확인_빈칸")
     @Test
-    public void 이메일_벨리데이션_확인_빈칸() {
+    public void test2() {
         //given
         String email = "";
 
@@ -54,8 +58,9 @@ public class AccountEmailValidationTest {
         accountRepository.save(account);
     }
 
-    @Test(expected = ConstraintViolationException.class)
-    public void 이메일_벨리데이션_확인_이메일아닌문자열() {
+    @DisplayName("이메일_벨리데이션_확인_이메일아닌문자열 exception")
+    @Test
+    public void test3() {
         //given
         String email = "not email format";
 
@@ -66,11 +71,14 @@ public class AccountEmailValidationTest {
                 .build();
 
         //then
-        accountRepository.save(account);
+        assertThatThrownBy(() -> accountRepository.save(account))
+                .isInstanceOf(ConstraintViolationException.class);
+
     }
 
+    @DisplayName("이메일_벨리데이션_확인_이메일포맷만지킨_문자열")
     @Test
-    public void 이메일_벨리데이션_확인_이메일포맷만지킨_문자열() {
+    public void test4() {
         //given
         String email = "not@Email.String";
 
@@ -84,8 +92,9 @@ public class AccountEmailValidationTest {
         accountRepository.save(account);
     }
 
+    @DisplayName("이메일_벨리데이션_확인_학교메일형식")
     @Test
-    public void 이메일_벨리데이션_확인_학교메일형식() {
+    public void test5() {
         //given
         String email = "201401452@inu.ac.kr";
 

@@ -1,6 +1,6 @@
-package org.ds.study.validationTest.repository;
+package com.javabom.bomspringboot.validationTest.repository;
 
-import org.ds.study.validationTest.entity.Account;
+import com.javabom.bomspringboot.validationTest.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {

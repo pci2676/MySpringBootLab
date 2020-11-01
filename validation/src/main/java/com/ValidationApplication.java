@@ -1,13 +1,13 @@
-package org.ds.study;
+package com;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudyApplication {
+public class ValidationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StudyApplication.class, args);
+        SpringApplication.run(ValidationApplication.class, args);
     }
 
 }

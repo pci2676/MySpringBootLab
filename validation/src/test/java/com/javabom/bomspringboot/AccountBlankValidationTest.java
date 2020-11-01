@@ -1,17 +1,18 @@
-package org.ds.study.validationTest.entity;
+package com.javabom.bomspringboot;
 
-import org.ds.study.validationTest.repository.AccountRepository;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.javabom.bomspringboot.validationTest.entity.Account;
+import com.javabom.bomspringboot.validationTest.repository.AccountRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class AccountBlankValidationTest {
 
     private String email = "example@gmail.com";
@@ -19,13 +20,14 @@ public class AccountBlankValidationTest {
     @Autowired
     private AccountRepository accountRepository;
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         accountRepository.deleteAll();
     }
 
-    @Test(expected = ConstraintViolationException.class)
-    public void 널값_넣으면() {
+    @DisplayName("널값_넣으면 exception")
+    @Test
+    public void test1() {
         //given
         String name = null;
 
@@ -36,11 +38,14 @@ public class AccountBlankValidationTest {
                 .build();
 
         //then
-        accountRepository.save(account);
+        assertThatThrownBy(() -> accountRepository.save(account))
+                .isInstanceOf(ConstraintViolationException.class);
+
     }
 
-    @Test(expected = ConstraintViolationException.class)
-    public void 빈칸_넣으면() {
+    @DisplayName("빈칸_넣으면 exception")
+    @Test
+    public void test2() {
         //given
         String name = "";
 
@@ -51,11 +56,13 @@ public class AccountBlankValidationTest {
                 .build();
 
         //then
-        accountRepository.save(account);
+        assertThatThrownBy(() -> accountRepository.save(account))
+                .isInstanceOf(ConstraintViolationException.class);
     }
 
+    @DisplayName("정상입력")
     @Test
-    public void 정상입력() {
+    public void test3() {
         //given
         String name = "박찬인";
 

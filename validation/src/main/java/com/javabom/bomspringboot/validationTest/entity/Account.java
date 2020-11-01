@@ -1,4 +1,4 @@
-package org.ds.study.validationTest.entity;
+package com.javabom.bomspringboot.validationTest.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
 
     @Id
