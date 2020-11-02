@@ -16,10 +16,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 public class AccountEmailValidationTest {
 
+    String name = "박찬인";
     @Autowired
     private AccountRepository accountRepository;
-
-    String name = "박찬인";
 
     @AfterEach
     void tearDown() {

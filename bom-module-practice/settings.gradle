@@ -1,0 +1,4 @@
+rootProject.name = 'bom-module-practice'
+include 'bom-api'
+include 'bom-client'
+
