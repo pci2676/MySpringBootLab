@@ -1,4 +1,4 @@
-import {getCookie} from "./utils/cookie.js";
+import {api} from "./api/index.js";
 
 const signUpBtn = document.querySelector("#sign-up-btn");
 
@@ -13,20 +13,12 @@ function SignUp() {
 
         console.log(JSON.stringify(memberSignUpRequest))
 
-        fetch("/members/sign-up", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
-            },
-            body: JSON.stringify(memberSignUpRequest)
-        })
-            .then(res => {
-                window.location.href = "/";
-            })
-            .catch(error => {
-                alert("가입 실패!");
-            })
+        api.member.signUp(memberSignUpRequest)
+            .then(res => window.location.href = "/")
+            .catch(err => {
+                console.log(err)
+                alert("가입 실패!")
+            });
     };
 
     const initEventListeners = () => {
