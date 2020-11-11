@@ -1,0 +1,1 @@
+INSERT INTO MEMBER (MEMBER_ID, EMAIL, NAME, PASSWORD, ROLE) VALUES (1, 'admin@javabom.com', 'admin', 'fJtMyiOiLEux1VYkioVDdedup6jbZvovdJfn8vUx8g9ndjdzwibJi', 'ADMIN');
