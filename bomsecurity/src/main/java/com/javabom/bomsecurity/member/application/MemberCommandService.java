@@ -1,19 +1,17 @@
-package com.javabom.bomsecurity.member.service;
+package com.javabom.bomsecurity.member.application;
 
-import com.javabom.bomsecurity.member.model.Member;
-import com.javabom.bomsecurity.member.repository.MemberRepository;
-import com.javabom.bomsecurity.member.service.dto.MemberSignUpRequest;
+import com.javabom.bomsecurity.member.application.dto.MemberSignUpRequest;
+import com.javabom.bomsecurity.member.domain.model.Member;
+import com.javabom.bomsecurity.member.domain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.javabom.bomsecurity.member.model.Role.MEMBER;
-
 @RequiredArgsConstructor
 @Service
-public class MemberService {
-    private final MemberRepository memberRepository;
+public class MemberCommandService {
+    private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -22,9 +20,8 @@ public class MemberService {
                 .email(memberSignUpRequest.getEmail())
                 .name(memberSignUpRequest.getName())
                 .password(passwordEncoder.encode(memberSignUpRequest.getPassword()))
-                .role(MEMBER)
                 .build();
-        Member saveMember = memberRepository.save(member);
+        Member saveMember = memberService.create(member);
         return saveMember.getId();
     }
 }

@@ -9,9 +9,13 @@ function Login() {
         api.member.login(formData)
             .then(res => {
                 console.log(res)
+                console.log(res.headers)
+                if (res.url.includes("?error")) {
+                    throw Error("로그인 실패.");
+                }
+                // window.location.href = res.url;
             })
             .catch(err => {
-                console.log(err)
                 alert("로그인 실패!")
             });
     };

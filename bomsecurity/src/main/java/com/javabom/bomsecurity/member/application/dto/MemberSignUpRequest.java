@@ -1,4 +1,4 @@
-package com.javabom.bomsecurity.member.service.dto;
+package com.javabom.bomsecurity.member.application.dto;
 
 import lombok.Getter;
 
