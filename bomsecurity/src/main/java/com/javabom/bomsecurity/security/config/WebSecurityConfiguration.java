@@ -9,10 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.header.writers.frameoptions.WhiteListedAllowFromStrategy;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
-
-import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -41,11 +37,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // csrf를 위한 xsrf-token 생성
-                .ignoringAntMatchers("/h2-console/**")
-                .and()
-                .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(new WhiteListedAllowFromStrategy(Collections.singletonList("localhost"))))
-                .frameOptions().sameOrigin()
                 .and()
                 .formLogin()
                 .loginPage("/login")
