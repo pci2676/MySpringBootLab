@@ -23,5 +23,4 @@ public class MemberCommandApi {
         return ResponseEntity.created(URI.create("/members/" + memberId)).build();
     }
 
-
 }

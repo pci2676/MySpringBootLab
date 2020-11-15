@@ -38,8 +38,8 @@ const navTemplate = `
           로그인
         </a>
       </div>
-      <div id="logout-button" class="hover:bg-teal-600 px-2 py-1 rounded">        
-        <button class="block inline-block lg:mt-0">
+      <div id="logout-btn-div" class="hover:bg-teal-600 px-2 py-1 rounded">        
+        <button id="logout-btn" class="block inline-block lg:mt-0">
           로그아웃
         </button>
       </div>

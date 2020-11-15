@@ -11,12 +11,9 @@ function SignUp() {
             password: formData.get("password")
         };
 
-        console.log(JSON.stringify(memberSignUpRequest))
-
         api.member.signUp(memberSignUpRequest)
             .then(res => window.location.href = "/")
             .catch(err => {
-                console.log(err)
                 alert("가입 실패!")
             });
     };

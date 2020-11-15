@@ -5,7 +5,7 @@ const HEADER = {
         'Content-Type': 'application/json',
         "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") // Spring에서 내려줘서 사용하는 쿠키의 이름과 보내는 헤더의 이름이 다르다.
     },
-    FORM_XSRF_TOKEN: {
+    XSRF_TOKEN: {
         "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
     }
 }
@@ -34,11 +34,11 @@ const METHOD = {
             })
         }
     },
-    POST_WITH_FORM(formData) {
+    POST_WITH_HEADER(data, headers) {
         return {
             method: 'POST',
-            headers: HEADER.FORM_XSRF_TOKEN,
-            body: formData
+            headers: headers,
+            body: data
         }
     }
 };
@@ -66,7 +66,10 @@ export const api = (() => {
             return requestWithData(`/api/members`, METHOD.POST(data));
         },
         login(data) {
-            return requestWithData(`/api/members/login`, METHOD.POST_WITH_FORM(data));
+            return requestWithData(`/api/members/login`, METHOD.POST_WITH_HEADER(data, HEADER.XSRF_TOKEN));
+        },
+        logout(data) {
+            return request(`/api/members/login`, METHOD.POST_WITH_HEADER(data, HEADER.XSRF_TOKEN))
         }
     };
 
