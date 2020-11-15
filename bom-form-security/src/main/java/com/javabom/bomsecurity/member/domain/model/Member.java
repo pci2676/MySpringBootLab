@@ -22,16 +22,20 @@ import java.util.Collection;
 public class Member {
     @Embedded
     private final MemberRoles memberRoles = new MemberRoles();
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
-    private Long id;
+
     @Column(name = "EMAIL", nullable = false)
     private String email;
+
     @Column(name = "NAME", nullable = false)
     private String name;
+
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "MEMBER_ID")
+    private Long id;
 
     @Builder
     public Member(String email, String name, String password) {
