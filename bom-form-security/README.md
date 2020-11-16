@@ -5,7 +5,7 @@
 - [ ] 마이 페이지
 - [x] 가입 페이지
 - [x] 로그인 페이지
-- [ ] 로그아웃 버튼
+- [x] 로그아웃 버튼
 - [ ] 관리자 페이지
 - [ ] 게시판 구현
     - [ ] 공지 사항 게시판
@@ -46,4 +46,7 @@ Form 로그인 방식을 사용하는 만큼 Form Login 방식으로 인증을 �
 이후에는 UserDetailService를 구현한 인증용 CustomService를 Spring Bean으로 제공해줘야한다.  
 인터페이스의 api는 하나로 UserDetails 를 반환하면 되는데 구현체로 User가 있으니 해당 구현체에 DB에 저장된 값을 username에 로그인에 사용한 id, password에 비밀번호, `Collection<? extends GrantedAuthority> authorities` 에 사용자의 권한을 GrantedAuthority로 구현해서 넘겨주면 된다.
 
-결과를 반환하면 `DaoAuthenticationProvider`에서 Form으로 전달받은 password를 passwordEncoder를 이용해 인코딩한 결과와 UserDetails 로 전달받은 password 를 비교해서 success, fail 처리를 한다. 
+결과를 반환하면 `DaoAuthenticationProvider`에서 Form으로 전달받은 password를 passwordEncoder를 이용해 인코딩한 결과와 UserDetails 로 전달받은 password 를 비교해서 success, fail 처리를 한다.
+세션값을 키로 SecurityContextHolder -> SecurityContext -> Authentication 에 인증된 상태 값을 저장하고 있는것 같다.
+
+기본적으로 사용하는 세션 스토리지가 있는 것 같다. 따라서 따로 세션 스토리지를 구현하지 않으면 메모리기반의 세션 스토리지에 세션 아이디로 로그인되어있는 지에 대한 값이 저장되는 것으로 보인다. 
