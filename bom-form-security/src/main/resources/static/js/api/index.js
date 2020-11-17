@@ -69,7 +69,7 @@ export const api = (() => {
             return requestWithData(`/api/members/login`, METHOD.POST_WITH_HEADER(data, HEADER.XSRF_TOKEN));
         },
         logout(data) {
-            return request(`/api/members/login`, METHOD.POST_WITH_HEADER(data, HEADER.XSRF_TOKEN))
+            return request(`/api/members/logout`, METHOD.POST_WITH_HEADER(data, HEADER.XSRF_TOKEN))
         }
     };
 

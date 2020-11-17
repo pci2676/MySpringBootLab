@@ -3,6 +3,7 @@ package com.javabom.bomsecurity.member.adapter.config.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final LoginLogSuccessHandler loginLogSuccessHandler;
@@ -41,6 +43,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/sign-up", "/api/members").permitAll()
                     .anyRequest().authenticated()
                 .and()
+                .exceptionHandling()
+                    .accessDeniedPage("/error/access") // 권한이 없는 페이지에 접근할 경우 볼 수 있는 페이지
+                .and()
                 .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // csrf를 위한 xsrf-token 생성
                 .and()
@@ -56,8 +61,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutUrl("/api/members/logout")
                     .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true)
-                    .permitAll();
+                    .invalidateHttpSession(true);
     }
     // @formatter:on
 }

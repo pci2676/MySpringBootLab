@@ -9,22 +9,27 @@ public class PageController {
 
     @GetMapping({"/", "/home"})
     public String homePage() {
-        return "home";
+        return "/home";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/sign-up")
     public String signUpPage() {
-        return "sign-up";
+        return "/sign-up";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public String adminPage() {
-        return "admin";
+        return "/admin";
+    }
+
+    @GetMapping("/error/access")
+    public String notAllowedPage() {
+        return "/error/access-denied";
     }
 }

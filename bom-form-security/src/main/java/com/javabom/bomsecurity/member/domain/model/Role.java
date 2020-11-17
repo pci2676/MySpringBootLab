@@ -7,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 @Getter
 @RequiredArgsConstructor
 public enum Role {
-    ADMIN("ADMIN"),
-    MEMBER("MEMBER"),
-    BLOCK("BLOCK");
+    ADMIN("ROLE_ADMIN"),
+    MEMBER("ROLE_MEMBER"),
+    BLOCK("ROLE_BLOCK");
 
     private final String role;
 
