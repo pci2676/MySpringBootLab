@@ -39,8 +39,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/home").permitAll()
-                    .antMatchers("/sign-up", "/api/members").permitAll()
+                    .antMatchers("/**").permitAll() // 전체에 접근할수 있게 하고 api 별로 어노테이션을 이용해서 권한을 부여해도 될듯
                     .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
