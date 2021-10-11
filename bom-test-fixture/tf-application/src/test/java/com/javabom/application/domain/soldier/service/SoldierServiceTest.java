@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.javabom.core.domain.solider.SoliderTestFixture.createSolider;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @EnableAutoConfiguration
@@ -31,17 +31,6 @@ class SoldierServiceTest {
     @AfterEach
     void tearDown() {
         repository.deleteAll();
-    }
-
-    private Soldier createSolider(String name, SoldierClass soldierClass, SoldierStatus status) {
-        LocalDateTime now = LocalDateTime.now();
-        return Soldier.builder()
-                .name(name)
-                .soldierClass(soldierClass)
-                .status(status)
-                .joinDateTime(now)
-                .modifiedDateTime(now)
-                .build();
     }
 
     @DisplayName("DISABLE 된 병사는 검색되지 않는다.")
