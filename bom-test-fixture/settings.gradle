@@ -1,0 +1,4 @@
+rootProject.name = 'bom-test-fixture'
+include 'tf-core'
+include 'tf-application'
+
